@@ -1,169 +1,122 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
       home: HomeScreen(),
-      title: 'Ostad App',
+      title: 'assignment 2',
     );
   }
 }
-
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
+
       appBar: AppBar(
-        title: Text('Home'),
-      ),
-      body: Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 200,
-                  height: 100,
-
-                  /// adding anything in container, used child
-                  child: Text('Hello',style: TextStyle(
-                    color: Colors.pink,
-                  ),),
-                  alignment: Alignment.center,
-                  /// for all side
-                  margin: EdgeInsets.all(16),
-                  //padding: EdgeInsets.all(10),
-                  /// for any single side
-                  //padding: EdgeInsets.only(top: 10, bottom: 15),
-                  /// for symmetrical
-                  padding: EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                  // for decoration colors can't be add outside of the decoration
-
-                  decoration: BoxDecoration(
-                    color: Colors.amber,
-                    border: Border.all(color: Colors.black,
-                    width: 2 ),
-                    // for whole side
-                    ///borderRadius: BorderRadius.circular(15),
-                    //for single side
-                    borderRadius: BorderRadius.only
-                      (bottomLeft: Radius.circular(18),
-                    topRight: Radius.circular(18)),
-                      /// for all kind of shape
-                    //shape: BoxShape.circle
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(16),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        textStyle: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500
-                        ),
-                        padding: EdgeInsets.all(16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)
-                        )
-                      ),
-                      onLongPress: (){
-                        print('Email Deleted');
-                      },
-                      onPressed: () {
-                        print('Email has been sent');
-                      }, child: Text('Send Email')),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.pink
-                  ),
-                  onPressed: (){
-                  print('Resend Email');
-                }, child: Text('Resend'),
-                ),
-                IconButton(onPressed: (){}, icon: Icon(Icons.add)),
-                OutlinedButton(
-
-                  onLongPress: (){
-                    print('Longpress on outlined button');
-                  },
-                    onPressed: (){},
-                    child: Text('Outlined Button')),
-                // input
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    //maxLines: 5,
-                    style: TextStyle(
-                      color: Colors.white
-                    ),
-                    decoration: InputDecoration(
-                      fillColor: Colors.blue,
-                      filled: true,
-                      hintText: 'Enter your email address',
-                      hintStyle: TextStyle(
-                        color: Colors.white70
-                      ),
-                      suffixIcon: Icon(Icons.email_outlined, color: Colors.white70,),
-                      label: Text('Email address'),
-                      labelStyle: TextStyle(
-                        color: Colors.white70
-                      )
-                    ),
-                  ),
-                ),
-                /*SizedBox(
-                  height: 10.0,
-                  width: 10,
-                ),*/
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextField(
-                    // wrap with sizedbox is used for padding
-                    obscureText: true,
-                    controller: TextEditingController(),
-                    style: TextStyle(
-                        color: Colors.white
-                    ),
-                    decoration: InputDecoration(
-                        fillColor: Colors.green,
-                        filled: true,
-                        hintText: 'Enter your password',
-                        hintStyle: TextStyle(
-                            color: Colors.white70
-                        ),
-                        suffixIcon: Icon(Icons.password, color: Colors.white70,),
-                        label: Text('Password'),
-                        labelStyle: TextStyle(
-                            color: Colors.white
-                        ),
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.white)
-                      ),
-                      disabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.red)
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.green)
-                      ),
-                    ),
-                  ),
-                ),
-
-              ],
-        )
+        title: Center(
+            child: Text("Photo Gallery"),
         ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Welcome to My Photo Gallery!",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Search for photos....",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Image clicked"),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Image.network(
+                        "https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0",
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text("Photo ${index + 1}"),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Photo 1"),
+              subtitle: Text("description about photo 1"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 2"),
+              subtitle: Text("description about photo 2"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 3"),
+              subtitle: Text("description about photo 3"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ElevatedButton(
+
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Photos Uploaded !"),
+                  ),
+                );
+              },
+              child: Center(
+                child: Icon
+                  (Icons.upload,size: 50,),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
-
-}
-void main (){
-  runApp(MyApp());
-
 }
