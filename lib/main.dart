@@ -1,69 +1,122 @@
 import 'package:flutter/material.dart';
 
+void main() {
+  runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
       home: HomeScreen(),
-      title: 'Ostad App',
+      title: 'assignment 2',
     );
   }
 }
-
-class HomeScreen extends StatelessWidget{
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)
+  {
     return Scaffold(
+
       appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.shopping_cart),
-          ),
-        ],
-
-        title: Text('My Shopping List'),
-        centerTitle: true,
+        title: Center(
+            child: Text("Photo Gallery"),
+        ),
       ),
-      body:Column(
-        children: [
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('OneUI',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('iOS',
-            style: TextStyle(
-              fontWeight: FontWeight.w300,
-            ),),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('Octopus OS'),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('MIUI'),
-          ),
-          ListTile(
-            leading: Icon(Icons.shopping_bag),
-            title: Text('Oxygen OS'),
-          ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Text(
+                "Welcome to My Photo Gallery!",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Search for photos....",
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Image clicked"),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Image.network(
+                        "https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0",
+                        height: 200,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text("Photo ${index + 1}"),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Photo 1"),
+              subtitle: Text("description about photo 1"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 2"),
+              subtitle: Text("description about photo 2"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ListTile(
+              title: Text("Photo 3"),
+              subtitle: Text("description about photo 3"),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
+              ),
+            ),
+            ElevatedButton(
 
-        ],
-      )
-
-
-          );
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text("Photos Uploaded !"),
+                  ),
+                );
+              },
+              child: Center(
+                child: Icon
+                  (Icons.upload,size: 50,),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
-
-}
-void main (){
-  runApp(MyApp());
-
 }
