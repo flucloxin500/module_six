@@ -1,118 +1,219 @@
 import 'package:flutter/material.dart';
 
+/*class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: true,
+      home: HomeScreen(),
+      title: 'Ostad App',
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget{
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  /// for listing student
+  List<String> students = [
+    'WALID',
+    'ARSHAD',
+    'JEETU',
+    'AHSAASY',
+    'DIPTO',
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Scrollbar(
+        thickness: 30,
+        radius: Radius.circular(10),
+        /// Listview separator
+        /// Listview builder
+        //
+        child: ListView.separated(
+          itemCount: students.length,
+          itemBuilder: (context,index){
+
+            return ListTile(
+              onTap: (){
+                print('Touched builder');
+              },
+              title: Text(students[index])
+            );
+            },
+          separatorBuilder: (context,index){
+            return Divider();
+          },
+        ),
+        //child: ListView.builder(
+          // Listview.separated
+
+          //separatorBuilder: (context,index){
+          //   return Column(
+          //     children: [
+          //       Text(index.toString()),
+          //       Divider(),
+          //     ],
+          //   );
+            //return Divider();
+          //},
+          //itemCount: 18,
+            //itemBuilder: (context,index) {
+          //return ListTile(
+            //title: Text('Item number ${index}'),
+          //);
+        //},
+        //),
+        /*GridView.builder(
+          itemCount: 16,
+         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+           crossAxisCount: 2 ,
+         ),
+          itemBuilder: (context,index){
+           return Column(
+             children: [
+               Text(index.toString()),
+               Icon(Icons.adb_rounded),
+             ],
+           );
+          },
+
+        ),*/
+
+        ),
+      );
+
+  }
+}
+
+ */
+/// Navigator ==> one page to another page
+/// Navigator 1(simnple and lengthy),2(complex)
+/// Router package ==>GoROuter,GetX,AutoRoute
+
 void main() {
   runApp(MyApp());
 }
+
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeScreen(),
-      title: 'assignment 2',
     );
   }
 }
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context)
-  {
-    return Scaffold(
 
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text("Photo Gallery"),
-        ),
+        title: Text('Home'),
       ),
-      body: SingleChildScrollView(
+      body: Center(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text(
-                "Welcome to My Photo Gallery!",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30,
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: "Search for photos....",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-            GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Image clicked"),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      Image.network(
-                        "https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0",
-                        height: 200,
-                        width: 200,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Text("Photo ${index + 1}"),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text("Photo 1"),
-              subtitle: Text("description about photo 1"),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
-              ),
-            ),
-            ListTile(
-              title: Text("Photo 2"),
-              subtitle: Text("description about photo 2"),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
-              ),
-            ),
-            ListTile(
-              title: Text("Photo 3"),
-              subtitle: Text("description about photo 3"),
-              leading: CircleAvatar(
-                backgroundImage: NetworkImage('https://th.bing.com/th/id/R.9b0b8859a140a9b61a29ae73850dd420?rik=mGpBFISO2drkiA&pid=ImgRaw&r=0'),
-              ),
+            Text(
+              'Home',
+              style: TextStyle(fontSize: 24),
             ),
             ElevatedButton(
-
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Photos Uploaded !"),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SettingsScreen(),
                   ),
                 );
               },
-              child: Center(
-                child: Icon
-                  (Icons.upload,size: 50,),
-              ),
+              child: Text('Go to settings'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OrdersScreen(),
+                  ),
+                );
+              },
+              child: Text('Go to orders'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Settings',
+              style: TextStyle(fontSize: 24),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Orders'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Orders',
+              style: TextStyle(fontSize: 24),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SettingsScreen(),),);
+              },
+              child: Text('Go to settings'),
+            ),
+
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Back to home',
+              style: TextStyle(fontWeight: FontWeight.bold),),
             ),
           ],
         ),
